@@ -15,13 +15,18 @@
     "@trpc/next": "^10.42.0",
     "@trpc/react-query": "^10.42.0",
     "@trpc/server": "^10.42.0",
+    "connect-redis": "^7.1.0",
+    "express-session": "^1.17.3",
+    "ioredis": "^5.3.2",
     "next": "13.5.6",
+    "next-session": "^4.0.5",
     "prisma": "^5.5.0",
     "react": "^18",
     "react-dom": "^18",
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/connect-redis": "^0.0.22",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
