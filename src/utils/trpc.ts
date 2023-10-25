@@ -1,6 +1,5 @@
 import { httpBatchLink } from "@trpc/client";
-import { CreateTRPCNext, createTRPCNext } from "@trpc/next";
-import App from "next/app";
+import { createTRPCNext } from "@trpc/next";
 import type { AppRouter } from "~/server/routers/_app";
 
 function getBaseUrl() {
@@ -19,19 +18,32 @@ function getBaseUrl() {
 
 export const trpc = createTRPCNext<AppRouter>({
   config(opts) {
+    const { ctx } = opts;
+    if (typeof window !== "undefined") {
+      return {
+        links: [
+          httpBatchLink({
+            url: "/api/trpc",
+          }),
+        ],
+      };
+    }
     return {
       links: [
         httpBatchLink({
           url: `${getBaseUrl()}/api/trpc`,
           // You can pass any HTTP headers you wish here
           async headers() {
+            if (!ctx?.req?.headers) {
+              return {};
+            }
             return {
-              // authorization: getAuthCookie(),
+              cookie: ctx.req.headers.cookie,
             };
           },
         }),
       ],
     };
   },
-  ssr: false,
+  ssr: true,
 });
