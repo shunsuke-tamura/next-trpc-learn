@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  db:
+    container_name: next-trpc-db
+    build:
+      context: ./
+      dockerfile: ./docker/db/Dockerfile
+    ports:
+      - ${MYSQL_PORT}:${MYSQL_PORT}
+    volumes:
+      - ./docker/db/data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
