@@ -13,3 +13,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
+  redis:
+    image: redis:7.0-alpine
+    container_name: next-trpc-redis
+    ports:
+      - ${REDIS_PORT}:${REDIS_PORT}
